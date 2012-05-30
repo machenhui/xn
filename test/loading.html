@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>loading  测试</title>
+<style type="text/css">
+ @-webkit-keyframes loading{
+ 	0%,100%{
+ 		opacity:0.1;
+ 		
+ 		}
+ 	30%{
+ 	    opacity:1;	
+ 	}	
+ }
+ .loading{
+ 	opacity:0.1;
+ 	-webkit-animation-delay:0.3s;
+ 	-webkit-animation:loading 3s infinite linear;
+ 
+ }
+</style>
+</head>
+<body>
+<div class="loading">加载中</div>
+</body>
+</html>

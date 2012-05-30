@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="/mlogin/a34262/wap/touch/scripts/xn.min.home.js"></script>
+<script type="text/javascript">
+	//http://a.xnimg.cn/
+	 (function() {
+        //  声明一个kola替代变量
+        window.xn = function() {
+            var arr = [this];
+            for (var i = 0, il = arguments.length; i < il; i++) {
+                arr.push(arguments[i]);
+            }
+            xn._cache.push(arr);
+        };
+
+        xn._cache = [];
+
+        //预备加载package
+        window.preLoad={};
+        preLoad._ready=[1];
+        preLoad._ready.push(function(){
+            var s = document.createElement('script');
+            s.src = 'http://m.xn.com/core/Loader.js';
+            s.type = 'text/javascript';
+            document.getElementsByTagName('head')[0].appendChild(s);
+            s = null;
+
+        });
+
+    })();
+
+</script>
+<title>Loader 测试页面</title>
+</head>
+<body>
+<script type="text/javascript">
+  xn("test.Wedgit",function(Wedgit){
+  		alert(Wedgit);
+  });
+
+  //创建script并执行package
+    if(preLoad && preLoad._ready){
+        if(preLoad._ready.length==2){
+            preLoad._ready[1].apply();
+        }else{
+            preLoad._ready[0]=1;
+        }
+    }
+
+</script>
+</body>
+</html>

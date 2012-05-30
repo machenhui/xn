@@ -1,0 +1,1 @@
+xn("TestJSDOC",["xn.lang.Class"],function(a){return a.create({_init:function(){alert("testmessage")},MY_CONST:"test",_myPrivateProperty:"",myPublicProperty:"",myPublicMethod:function(){}})});xn("test.Wedgit",[],function(){return Object.create({aa:111})});
