@@ -88,7 +88,7 @@ xn.use(["loader_test.OAuthInner","loader_test.SQLite","loader_test.IndexedDB","l
 		  "client_id=1000630186960.apps.googleusercontent.com";
 	  var login = document.createElement('a');
 	  login.href = url;
-	  login.html = "登录";
+	  login.innerHTML = "登录";
 	  document.body.insertBefore(login,books);
 	  
 	  var url = "https://www.googleapis.com/books/v1/volumes?q=harry+potter";
