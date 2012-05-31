@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script type="text/javascript" src="http://10.2.126.77:8080/j-template-t2/js.jsp"></script>
 <script type="text/javascript">
 var xn = {};
 xn.use = function() {
@@ -43,11 +44,12 @@ document.getElementsByTagName('head')[0].appendChild(script);
 </head>
 <body>
 追逐梦想，热爱生活
-<script type="text/javascript" src="lib/core-beta/Loader.js"></script>
+
+<div id="books"></div>
+
 <script type="text/javascript">
 xn.use(["loader_test.OAuthInner","loader_test.SQLite","loader_test.IndexedDB","loader_test.XHR2"],function(OAuth,SQLite,IndexedDB,XHR2){
-	  var oauth = new OAuth();
-	 
+	/*   var oauth = new OAuth();
 	  oauth.checkLogin(function(data){
 		  
 		  document.querySelector("section.login_message").innerHTML=examples.simple.userMessage(data);
@@ -74,9 +76,19 @@ xn.use(["loader_test.OAuthInner","loader_test.SQLite","loader_test.IndexedDB","l
 			   document.querySelector("section.feed_list").innerHTML=examples.simple.feed(data); 
 		  }); 
 		  
-	  }); 
+	  });  */
 	  
 	  //var url = "https://www.googleapis.com/books/v1/volumes?q=harry+potter&callback=handleResponse";
+	  var books = document.querySelector("#books");
+	  var url="https://accounts.google.com/o/oauth2/auth?"+
+		  "scope=https://www.googleapis.com/auth/userinfo.profile+https://www.googleapis.com/auth/userinfo.email&"+
+		  "state=/profile&"+
+		  "redirect_uri=http://xn.com/oauth2callback.html&"+
+		  "response_type=token&"+
+		  "client_id=1000630186960.apps.googleusercontent.com";
+	  var iframe = document.createElement('iframe');
+	  iframe.src = url;
+	  document.body.insertBefore(iframe,books);
 	  var url = "https://www.googleapis.com/books/v1/volumes?q=harry+potter";
 	  var xhr2 =new XHR2({
 			url:url,
@@ -84,11 +96,12 @@ xn.use(["loader_test.OAuthInner","loader_test.SQLite","loader_test.IndexedDB","l
 			withCredentials:false,
 			data:null,
 			success:function(response){
-				console.log(JSON.stringify(response));
+				console.log(response);
+				var result = xn_template.google.books({books:response});
 				
+				books.innerHTML = result;
 			},
-			failure:function(response){
-				
+			failure:function(response){				
 				alert("error");
 			}
 		}); 
