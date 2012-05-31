@@ -86,9 +86,10 @@ xn.use(["loader_test.OAuthInner","loader_test.SQLite","loader_test.IndexedDB","l
 		  "redirect_uri=http://mc1.test.renren.com/mlogin/xn_api_test/oauth2callback.html&"+
 		  "response_type=token&"+
 		  "client_id=1000630186960.apps.googleusercontent.com";
-	  var iframe = document.createElement('iframe');
+	 /*  var iframe = document.createElement('iframe');
 	  iframe.src = url;
-	  document.body.insertBefore(iframe,books);
+	  document.body.insertBefore(iframe,books); */
+	  window.open(url);
 	  var url = "https://www.googleapis.com/books/v1/volumes?q=harry+potter";
 	  var xhr2 =new XHR2({
 			url:url,
