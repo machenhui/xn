@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>你好</title>
+<script type="text/javascript">
+var xn = {};
+xn.use = function() {
+	var arr = [];
+	for ( var i = 0, il = arguments.length; i < il; i++) {
+		arr.push(arguments[i]);
+	}
+	xn._cache_use.push(arr);
+};
+xn.create = function() {
+	var arr = [];
+	for ( var i = 0, il = arguments.length; i < il; i++) {
+		arr.push(arguments[i]);
+	}
+	xn._cache_create.push(arr);
+};
+xn._cache_use = new Array();
+xn._cache_create = new Array();
+xn.config = {
+	_path : {
+		"core-beta.Class" : {
+			path : 'lib/core-beta/Class.js',
+			requires : [ "loader_test.A", "loader_test.B" ]
+		},
+		"loader_test.A" : {
+			path : "lib/loader_test/A.js"
+		},
+		"loader_test.B" : {
+			path : "lib/loader_test/B.js"
+		}
+	}
+};
+var script = document.createElement('script');
+script.src = 'lib/core-beta/Loader.js';
+document.getElementsByTagName('head')[0].appendChild(script);
+
+</script>
+</head>
+<body>
+回调页面
+<script type="text/javascript">
+  
+  xn.use(["loader_test.XHR2"],function(XHR2){
+	  var info = window.location.hash.slice(1);
+	  var infoArray = info.split("&");
+	  var infoMap = {};
+	  for(var i = infoArray.length-1;i>=0;i--){
+		  var str = infoArray[i];
+		  var strA = str.split("=");
+		  infoMap[strA[0]]=strA[1];
+	  }
+	  var tokeninfourl="https://www.googleapis.com/oauth2/v1/tokeninfo?access_token="+infoMap["access_token"];
+	  var userInfoURL ="https://www.googleapis.com/oauth2/v1/userinfo?access_token={accessToken}".replace("{accessToken}",infoMap["access_token"]);
+  	  var xhr2 =new XHR2({
+  			url:tokeninfourl,
+  			method:"get",
+  			withCredentials:false,
+  			data:null,
+  			success:function(response){
+  				console.log(response);
+  				
+  			},
+  			failure:function(response){				
+  				alert("error");
+  			}
+  		}); 
+  	  
+  	   var xhr2 =new XHR2({
+			url:userInfoURL,
+			method:"get",
+			withCredentials:false,
+			data:null,
+			success:function(response){
+				console.log(response);
+				
+			},
+			failure:function(response){				
+				alert("error");
+			}
+		});
+  	  
+  	  
+  	  
+  });
+
+  </script>
+  
+
+</body>
+</html>
