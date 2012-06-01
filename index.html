@@ -166,7 +166,7 @@ xn.use(["loader_test.OAuthInner","loader_test.SQLite","loader_test.IndexedDB","l
 		    },
 		    // if there was an error
 		     function(error){
-		      alert('ouch');
+		      console.error('不能获取定位信息');
 		    });
 		}
 	  function getWeather(woeid){
