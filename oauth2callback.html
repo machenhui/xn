@@ -43,6 +43,7 @@ document.getElementsByTagName('head')[0].appendChild(script);
 </head>
 <body>
 回调页面
+<section class="user_info"></section>
 <script type="text/javascript">
   
   xn.use(["loader_test.XHR2"],function(XHR2){
@@ -77,19 +78,95 @@ document.getElementsByTagName('head')[0].appendChild(script);
 			data:null,
 			success:function(response){
 				console.log(response);
+				getPlusMessage(response.id);
+				getActivities(response.id);
+				getTasks();
+				var user_info = xn_template.google.userInfo({userInfo:response});
+				var user_infoEle = document.querySelector(".user_info");
+				user_infoEle.innerHTML = user_info;
+			},
+			failure:function(response){				
+				alert("error");
+			}
+		});
+  	   function getTasks(){
+  		   var taskListURL = "https://www.googleapis.com/tasks/v1/users/@me/lists";
+  		   
+  		  var xhr2 =new XHR2({
+  			url:taskListURL,
+  			method:"get",
+  			data:{
+  				"access_token":infoMap["access_token"],
+  				"maxResults":20
+  			},
+  			withCredentials:false,
+  			data:null,
+  			success:function(response){
+  				console.log("Task +");
+  				console.log(response);
+  				
+  			},
+  			failure:function(response){				
+  				alert("error");
+  			}
+  		});
+  		   
+  	   }
+  	   function getActivities(userId){
+  		   
+  		  var plusURL = "https://www.googleapis.com/plus/v1/people/{userId}/activities/{collection}";
+ 		   var xhr2 =new XHR2({
+			url:plusURL.replace("{userId}",userId).replace("{collection}","public"),
+			method:"get",
+			data:{
+				"access_token":infoMap["access_token"],
+				"maxResults":20
+			},
+			withCredentials:false,
+			data:null,
+			success:function(response){
+				console.log("google +");
+				console.log(response);
 				
 			},
 			failure:function(response){				
 				alert("error");
 			}
 		});
-  	  
-  	  
-  	  
+  		   
+  	   }
+  	   
+  	   function getPlusMessage(userId){
+  		   var plusURL = "https://www.googleapis.com/plus/v1/people/{userId}";
+  		   var xhr2 =new XHR2({
+ 			url:plusURL.replace("{userId}",userId),
+ 			method:"get",
+ 			data:{
+ 				"access_token":infoMap["access_token"]
+ 			},
+ 			withCredentials:false,
+ 			data:null,
+ 			success:function(response){
+ 				console.log("google +");
+ 				console.log(response);
+ 				
+ 			},
+ 			failure:function(response){				
+ 				alert("error");
+ 			}
+ 		});
+  	   }
+  	    	  
   });
 
   </script>
+  <script type="text/javascript">
   
+  var templateScript = document.createElement('script');
+  templateScript.src = 'template';
+  document.getElementsByTagName('head')[0].appendChild(templateScript);
+  
+  </script>
 <a href="javascript:window.close();">关闭</a>
 </body>
 </html>

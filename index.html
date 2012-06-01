@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <script type="text/javascript" src="template"></script>
+<script src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3168919025" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 var xn = {};
 xn.use = function() {
@@ -44,7 +45,7 @@ document.getElementsByTagName('head')[0].appendChild(script);
 </head>
 <body>
 追逐梦想，热爱生活
-
+<div id="weather"></div>
 <div id="books"></div>
 
 <script type="text/javascript">
@@ -81,7 +82,10 @@ xn.use(["loader_test.OAuthInner","loader_test.SQLite","loader_test.IndexedDB","l
 	  //var url = "https://www.googleapis.com/books/v1/volumes?q=harry+potter&callback=handleResponse";
 	  var books = document.querySelector("#books");
 	  var url="https://accounts.google.com/o/oauth2/auth?"+
-		  "scope=https://www.googleapis.com/auth/userinfo.profile+https://www.googleapis.com/auth/userinfo.email&"+
+		  "scope=https://www.googleapis.com/auth/userinfo.profile"+
+		  "+https://www.googleapis.com/auth/plus.me"+
+		  "+https://www.googleapis.com/auth/tasks"+
+		  "+https://www.googleapis.com/auth/userinfo.email&"+
 		  "state=/profile&"+
 		  "redirect_uri=http://mc1.test.renren.com/mlogin/xn_api_test/oauth2callback.html&"+
 		  "response_type=token&"+
@@ -150,9 +154,60 @@ xn.use(["loader_test.OAuthInner","loader_test.SQLite","loader_test.IndexedDB","l
 		  console.log("error"+event.message);
 	  });*/
 	  
-	  
+	  if(navigator.geolocation){
+		     // get the current position
+		      navigator.geolocation.getCurrentPosition(
+		   
+		     // if this was successful, get the latitude and longitude
+		     function(position){
+		       var lat = position.coords.latitude;
+		       var lon = position.coords.longitude;
+		       
+		    },
+		    // if there was an error
+		     function(error){
+		      alert('ouch');
+		    });
+		}
+	  function getWeather(woeid){
+		  var weatherURL = "weather?w={woeid}&u=c";
+		  var xhr2 =new XHR2({
+				url:weatherURL.replace("{woeid}",woeid),
+				method:"get",
+				withCredentials:false,
+				data:{
+					format:"json"
+				},
+				format:"xml",
+				success:function(response){
+					console.log(response);
+					var condition = response.querySelectorAll("condition")[0];
+					var attributes = condition.attributes;
+					
+					response.childNodes[0].querySelectorAll("rss *|condition");
+					for (var i = attributes.length-1;i>=0;i--){ 
+						
+						var attribute = attributes[i];
+						console.log(attribute.nodeName+"====="+attribute.value);
+					}
+					var weatherEle = document.querySelector("#weather");
+					
+					weatherEle.innerHTML = response.querySelector("rss channel item description").textContent;
+				},
+				failure:function(response){				
+					alert("error");
+				}
+			});
+		  
+	  }
+	  getWeather("2151330");  
 });
-
+/* WB2.login(function(){
+	//callback function
+    console.log("success");	 
+}); */
 </script>
+
+
 </body>
 </html>
