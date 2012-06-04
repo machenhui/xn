@@ -1,0 +1,110 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+    google.load("feeds", "1");
+
+    function initialize() {
+    	loadScience();
+    	loadTechnology();
+    	loadChina();
+    	loadWeather();
+    }
+    
+    function loadScience(){
+        var feed = new google.feeds.Feed("https://news.google.com/news/feeds?pz=1&cf=all&ned=cn&hl=zh-CN&topic=snc&output=rss");
+        feed.setNumEntries(200);
+        feed.load(function(result) {
+          if (!result.error) {
+            var container = document.querySelector("#science .feed");
+            for (var i = 0; i < result.feed.entries.length; i++) {
+              var entry = result.feed.entries[i];
+              var div = document.createElement("div");
+              div.innerHTML = entry.content;
+              
+              container.appendChild(div);
+            }
+          }
+        });
+    }
+    
+    function loadTechnology(){
+        var feed = new google.feeds.Feed("http://news.google.com/news?pz=1&cf=all&ned=cn&hl=zh-CN&topic=tc&output=rss");
+        feed.setNumEntries(20);
+        feed.load(function(result) {
+          if (!result.error) {
+            var container = document.querySelector("#technology .feed");
+            for (var i = 0; i < result.feed.entries.length; i++) {
+              var entry = result.feed.entries[i];
+              var div = document.createElement("div");
+              div.innerHTML = entry.content;
+              //div.appendChild(document.createTextNode(entry.title));
+              container.appendChild(div);
+            }
+          }
+        });
+    }
+    
+    function loadChina(){
+        var feed = new google.feeds.Feed("http://news.google.com/news?ned=cn&topic=n&output=rss");
+        feed.setNumEntries(20);
+        feed.load(function(result) {
+          if (!result.error) {
+            var container = document.querySelector("#china .feed");
+            for (var i = 0; i < result.feed.entries.length; i++) {
+              var entry = result.feed.entries[i];
+              var div = document.createElement("div");
+              div.innerHTML = entry.content;
+              //div.appendChild(document.createTextNode(entry.title));
+              container.appendChild(div);
+            }
+          }
+        });
+    }
+    
+    
+    function loadWeather(){
+        var feed = new google.feeds.Feed("http://weather.yahooapis.com/forecastrss?w={woeid}&u=c".replace("{woeid}","2151330"));
+        feed.setNumEntries(20);
+        feed.load(function(result) {
+          if (!result.error) {
+            var container = document.querySelector("#weather .feed");
+            for (var i = 0; i < result.feed.entries.length; i++) {
+              var entry = result.feed.entries[i];
+              var div = document.createElement("div");
+              div.innerHTML = entry.content;
+              //div.appendChild(document.createTextNode(entry.title));
+              container.appendChild(div);
+            }
+          }
+        });
+        
+        
+        
+    }
+    
+    google.setOnLoadCallback(initialize);
+
+    </script>
+  </head>
+  <body>
+  <section id="weather">
+  	 	<header>天气</header>
+  	  	<div class="feed"></div>
+  	</section>
+  	<section id="science">
+  	 	<header>科学</header>
+  	  	<div class="feed"></div>
+  	</section>
+    <section id="technology">
+  	 	<header>技术</header>
+  	  	<div class="feed"></div>
+  	</section>
+  	<section id="china">
+  	 	<header>中国</header>
+  	  	<div class="feed"></div>
+  	</section>
+  </body>
+</html>
