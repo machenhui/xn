@@ -3,9 +3,10 @@
 <head>
 <meta http-equiv="Content-Type" charset="UTF-8">
 <meta content="telephone=no" name="format-detection" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" />
 <meta charset="UTF-8">
 <script type="text/javascript" src="template"></script>
+<link rel="stylesheet" href="css/index.css" type="text/css" />
 <script type="text/javascript">
 var xn = {};
 xn.use = function() {
@@ -43,48 +44,69 @@ script.src = 'lib/core-beta/Loader.js';
 document.getElementsByTagName('head')[0].appendChild(script);
 
 </script>
-<title>信念</title>
+<script type="text/javascript">
+	if(window.location.hash==""){
+		window.location.hash="#weather";
+	}
+</script>
+<title>信念--追逐梦想，热爱生活</title>
 </head>
 <body>
-追逐梦想，热爱生活
-<form action="">
- <input type="date"/>
-</form>
-<div id="weather"></div>
+<article class="google_news">
+ <nav>
+ 	<a href="#weather">天气</a>
+ 	<a href="#science">科学</a>
+ 	<a href="#technology">技术</a>
+ 	<a href="#china">中国</a>
+ </nav>
+		<section id="weather">
+			<header>天气</header>
+			<div class="feed"></div>
+		</section>
+		<section id="science">
+			<header>科学</header>
+			<div class="feed"></div>
+		</section>
+		<section id="technology">
+			<header>技术</header>
+			<div class="feed"></div>
+		</section>
+		<section id="china">
+			<header>中国</header>
+			<div class="feed"></div>
+		</section>
+	</article> 	
+ <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+ 
+ <script type="text/javascript">
+ xn.use(["google.Feed","loader_test.YahooAPI"],function(Feed,YahooAPI){
+	 if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(
+					function(position) {
+
+						var lat = position.coords.latitude;
+						var lon = position.coords.longitude;
+						var api = new YahooAPI();
+						api.getPlace(lat, lon,function(woeid){
+							
+							Feed.loadWeather(woeid);
+						});
+					}, function(error) {
+						console.error('不能获取定位信息');
+					});
+		}
+	 Feed.loadData(function(){		 
+		
+			});
+		});
+	     
+</script>
+	
+	
 <div id="books"></div>
 
 <script type="text/javascript">
-xn.use(["loader_test.XHR2","loader_test.YahooAPI"],function(XHR2,YahooAPI){
-	/*   var oauth = new OAuth();
-	  oauth.checkLogin(function(data){
-		  
-		  document.querySelector("section.login_message").innerHTML=examples.simple.userMessage(data);
-		  
-		  oauth.friendsGet(function(data){
-			  SQLite.prepareDatabase(function(db){
-				  //存储好友信息				  
-				  //SQLite.saveFriends(data.friend_list);
-				  console.log(data.friend_list);
-			  },function(event){
-				  console.log("error"+event.message);
-			  }); 
-			  document.querySelector("section.searchFriend").innerHTML = xnTemplate.sdk.searchFirends(data);
-		  });
-		  	
-		  oauth.feedGet(function(data){
-				 
-			   SQLite.prepareDatabase(function(db){					  
-					  //SQLite.saveFeed(data.feed_list);
-				  },function(event){
-					  console.log("error"+event.message);
-				  }); 
-			   console.log(data.feed_list);
-			   document.querySelector("section.feed_list").innerHTML=examples.simple.feed(data); 
-		  }); 
-		  
-	  });  */
-	  
-	  //var url = "https://www.googleapis.com/books/v1/volumes?q=harry+potter&callback=handleResponse";
+xn.use(["loader_test.XHR2"],function(XHR2,YahooAPI){
 	  var books = document.querySelector("#books");
 	  var url="https://accounts.google.com/o/oauth2/auth?"+
 		  "scope=https://www.googleapis.com/auth/userinfo.profile"+
@@ -111,215 +133,17 @@ xn.use(["loader_test.XHR2","loader_test.YahooAPI"],function(XHR2,YahooAPI){
 				console.log(response);
 				var result = xn_template.google.books({books:response});
 				
-				books.innerHTML = result;
+				//books.innerHTML = result;
 			},
 			failure:function(response){				
 				alert("error");
-				alert(response);
 			
 			}
 		}); 
-	  //获取字库
-	  /* var xhr=new XHR2({
-			url:"http://t.comicsand.com/manifest/pinyin.php",
-			method:"post",
-			data:null,
-			success:function(response){
-				//使用这种存储方式，消耗时间 51396 ms
-				SQLite.prepareDatabase(function(db){
-					  var array = new Array();
-					  for(var i in response){
-						  array.push({key:i,value:response[i]});
-					  }
-					  console.log("sqllite startTime======"+new Date().getTime());
-					  SQLite.savePinyin(array);
-				  },function(event){
-					  console.log("error"+event.message);
-				  });
-				
-				  //indexedDB 消耗时间 2237 ms
-				  var indexedDB = new IndexedDB("test",function(event){
-					  console.log(new Date().getTime()+"============开始时间");
-					  indexedDB.save(response);
-					 },function(event){
-						 alert("error");
-					 });
-			},
-			failure:function(response){
-				alert("请求失败");
-			}
-		});	
-	  */
-	  
-	  
-	/*  SQLite.prepareDatabase(function(db){
-		  
-		  SQLite.searchWord("马",function(data){
-			  console.log(data);
-		  });
-	  },function(event){
-		  console.log("error"+event.message);
-	  });*/
-	  
-	  if(navigator.geolocation){
-		     // get the current position
-		      navigator.geolocation.getCurrentPosition(
-		   
-		     // if this was successful, get the latitude and longitude
-		     function(position){
-		       var lat = position.coords.latitude;
-		       var lon = position.coords.longitude;
-		       var api = new YahooAPI();
-		       api.getPlace(lat,lon);
-		    },
-		    // if there was an error
-		     function(error){
-		      console.error('不能获取定位信息');
-		    });
-		}
-	  function getWeather(woeid){
-		  var weatherURL = "weather?w={woeid}&u=c";
-		  var xhr2 =new XHR2({
-				url:weatherURL.replace("{woeid}",woeid),
-				method:"get",
-				withCredentials:false,
-				data:{
-					format:"json"
-				},
-				format:"xml",
-				success:function(response){
-					console.log(response);
-					var condition = response.querySelectorAll("condition")[0];
-					var attributes = condition.attributes;
-					
-					response.childNodes[0].querySelectorAll("rss *|condition");
-					for (var i = attributes.length-1;i>=0;i--){ 
-						
-						var attribute = attributes[i];
-						console.log(attribute.nodeName+"====="+attribute.value);
-					}
-					var weatherEle = document.querySelector("#weather");
-					
-					weatherEle.innerHTML = response.querySelector("rss channel item description").textContent;
-				},
-				failure:function(response){				
-					alert("error");
-				}
-			});
-		  
-	  }
-	  
-	 // getWeather("2151330"); 
-	  //getWeather("12906600");
+	 
+	 
 });
-/* WB2.login(function(){
-	//callback function
-    console.log("success");	 
-}); */
+
 </script>
- <section id="weather">
-  	 	<header>天气</header>
-  	  	<div class="feed"></div>
-  	</section>
-  	<section id="science">
-  	 	<header>科学</header>
-  	  	<div class="feed"></div>
-  	</section>
-    <section id="technology">
-  	 	<header>技术</header>
-  	  	<div class="feed"></div>
-  	</section>
-  	<section id="china">
-  	 	<header>中国</header>
-  	  	<div class="feed"></div>
-  	</section>
- <script type="text/javascript" src="https://www.google.com/jsapi"></script>
- 
- <script type="text/javascript">
-
-    google.load("feeds", "1");
-
-    function initialize() {
-    	loadScience();
-    	loadTechnology();
-    	loadChina();
-    	loadWeather();
-    }
-    
-    function loadScience(){
-        var feed = new google.feeds.Feed("https://news.google.com/news/feeds?pz=1&cf=all&ned=cn&hl=zh-CN&topic=snc&output=rss");
-        feed.setNumEntries(200);
-        feed.load(function(result) {
-          if (!result.error) {
-            var container = document.querySelector("#science .feed");
-            for (var i = 0; i < result.feed.entries.length; i++) {
-              var entry = result.feed.entries[i];
-              var div = document.createElement("div");
-              div.innerHTML = entry.content;
-              
-              container.appendChild(div);
-            }
-          }
-        });
-    }
-    
-    function loadTechnology(){
-        var feed = new google.feeds.Feed("http://news.google.com/news?pz=1&cf=all&ned=cn&hl=zh-CN&topic=tc&output=rss");
-        feed.setNumEntries(20);
-        feed.load(function(result) {
-          if (!result.error) {
-            var container = document.querySelector("#technology .feed");
-            for (var i = 0; i < result.feed.entries.length; i++) {
-              var entry = result.feed.entries[i];
-              var div = document.createElement("div");
-              div.innerHTML = entry.content;
-              //div.appendChild(document.createTextNode(entry.title));
-              container.appendChild(div);
-            }
-          }
-        });
-    }
-    
-    function loadChina(){
-        var feed = new google.feeds.Feed("http://news.google.com/news?ned=cn&topic=n&output=rss");
-        feed.setNumEntries(20);
-        feed.load(function(result) {
-          if (!result.error) {
-            var container = document.querySelector("#china .feed");
-            for (var i = 0; i < result.feed.entries.length; i++) {
-              var entry = result.feed.entries[i];
-              var div = document.createElement("div");
-              div.innerHTML = entry.content;
-              //div.appendChild(document.createTextNode(entry.title));
-              container.appendChild(div);
-            }
-          }
-        });
-    }
-    
-    
-    function loadWeather(){
-        var feed = new google.feeds.Feed("http://weather.yahooapis.com/forecastrss?w={woeid}&u=c".replace("{woeid}","2151330"));
-        feed.setNumEntries(20);
-        feed.load(function(result) {
-          if (!result.error) {
-            var container = document.querySelector("#weather .feed");
-            for (var i = 0; i < result.feed.entries.length; i++) {
-              var entry = result.feed.entries[i];
-              var div = document.createElement("div");
-              div.innerHTML = entry.content;
-              //div.appendChild(document.createTextNode(entry.title));
-              container.appendChild(div);
-            }
-          }
-        });
-        
-        
-        
-    }
-    
-    google.setOnLoadCallback(initialize);
-
-    </script>
 </body>
 </html>

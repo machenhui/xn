@@ -1,0 +1,35 @@
+@CHARSET "UTF-8";
+body{
+	margin:0px;
+	padding:0px;
+	
+}
+article.google_news{
+}
+article.google_news nav{
+	position:fixed;
+	background-color:#ccc;
+	top:0px;
+	width:100%;
+	z-index:100;
+	display:-webkit-box;
+	-webkit-box-orient: horizontal;
+	-webkit-box-align:center;	
+	padding:0.5em;
+	-webkit-box-sizing:border-box;
+}
+article.google_news nav a{
+	-webkit-box-flex:1;
+	display:block;
+	text-align:center;
+}
+article.google_news section{
+	display:none;
+	padding-top:2.5em;
+	/* overflow:auto;
+	-webkit-overflow-scrolling:touch; */
+}
+
+article.google_news section:target{
+	display:block;
+}
