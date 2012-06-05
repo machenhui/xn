@@ -3,6 +3,10 @@
 <head>
 <meta http-equiv="Content-Type" charset="UTF-8">
 <meta content="telephone=no" name="format-detection" />
+<!-- 
+  必须加入 user-scalable=no
+  否则在部分机器上，fixed 定位，会出问题。
+ -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" />
 <meta charset="UTF-8">
 <script type="text/javascript" src="template"></script>
@@ -83,21 +87,18 @@ document.getElementsByTagName('head')[0].appendChild(script);
 	 if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(
 					function(position) {
-
 						var lat = position.coords.latitude;
 						var lon = position.coords.longitude;
 						var api = new YahooAPI();
-						api.getPlace(lat, lon,function(woeid){
-							
+						
+						api.getPlace(lat, lon,function(woeid){							
 							Feed.loadWeather(woeid);
 						});
 					}, function(error) {
 						console.error('不能获取定位信息');
-					});
+					},{enableHighAccuracy:true, maximumAge:30000, timeout:27000});
 		}
-	 Feed.loadData(function(){		 
-		
-			});
+	 		Feed.loadData();
 		});
 	     
 </script>
@@ -121,7 +122,7 @@ xn.use(["loader_test.XHR2"],function(XHR2,YahooAPI){
 	  login.href = url;
 	  login.target="_blank";
 	  login.innerHTML = "登录";
-	  document.body.insertBefore(login,books);
+	  //document.body.insertBefore(login,books);
 	  
 	  var url = "https://www.googleapis.com/books/v1/volumes?q=harry+potter";
 	  var xhr2 =new XHR2({

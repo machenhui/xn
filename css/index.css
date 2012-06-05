@@ -8,7 +8,8 @@ article.google_news{
 }
 article.google_news nav{
 	position:fixed;
-	background-color:#ccc;
+	background-image:-webkit-gradient(linear,0 0,0 100%,from(white),to(#DBDBDB));
+	box-shadow:0 0px 1px 0px black;
 	top:0px;
 	width:100%;
 	z-index:100;
