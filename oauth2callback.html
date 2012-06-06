@@ -180,6 +180,7 @@ document.getElementsByTagName('head')[0].appendChild(script);
   			data:null,
   			success:function(response){
   				console.log("search");
+  				alert(JSON.stringify(response));
   				var resultDIV = document.createDocumentFragment();
   				for (var i = 0;i<response.items.length;i++){
   					var item = response.items[i];
