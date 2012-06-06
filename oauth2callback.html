@@ -184,6 +184,7 @@ document.getElementsByTagName('head')[0].appendChild(script);
   				var resultDIV = document.createDocumentFragment();
   				if(response.items == null){
   					console.error("不能使用自定义搜索，出现错误");
+  					return ;
   				}
   				for (var i = 0;i<response.items.length;i++){
   					var item = response.items[i];
