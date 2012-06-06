@@ -180,8 +180,11 @@ document.getElementsByTagName('head')[0].appendChild(script);
   			data:null,
   			success:function(response){
   				console.log("search");
-  				alert(JSON.stringify(response));
+  				
   				var resultDIV = document.createDocumentFragment();
+  				if(response.items == null){
+  					console.error("不能使用自定义搜索，出现错误");
+  				}
   				for (var i = 0;i<response.items.length;i++){
   					var item = response.items[i];
   					var div = document.createElement("div");
@@ -190,7 +193,7 @@ document.getElementsByTagName('head')[0].appendChild(script);
   				}
   				var resutlHTML = xn_template.google.search({result:response});
   				searchEle.innerHTML = resutlHTML;
-  				console.log(response);
+  				
   				
   			},
   			failure:function(response){				
