@@ -19,10 +19,15 @@ article.google_news nav{
 	padding:0.5em;
 	-webkit-box-sizing:border-box;
 }
+
+article.google_news nav a:active{
+	background-color:red;
+}
 article.google_news nav a{
 	-webkit-box-flex:1;
 	display:block;
 	text-align:center;
+	-webkit-tap-heighlight-color:rgba(0,0,0,0);
 }
 article.google_news section{
 	display:none;

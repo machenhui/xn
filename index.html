@@ -59,12 +59,18 @@ document.getElementsByTagName('head')[0].appendChild(script);
 <article class="google_news">
  <nav>
  	<a href="#weather">天气</a>
+ 	<a href="#renren">人人</a>
  	<a href="#science">科学</a>
- 	<a href="#technology">技术</a>
  	<a href="#china">中国</a>
+ 	<a href="#android">Android</a>
+ 	<a href="#tizen">Tizen</a>
  </nav>
 		<section id="weather">
 			<header>天气</header>
+			<div class="feed"></div>
+		</section>
+		<section id="renren">
+			<header>人人网</header>
 			<div class="feed"></div>
 		</section>
 		<section id="science">
@@ -77,6 +83,14 @@ document.getElementsByTagName('head')[0].appendChild(script);
 		</section>
 		<section id="china">
 			<header>中国</header>
+			<div class="feed"></div>
+		</section>
+		<section id="android">
+			<header>Android</header>
+			<div class="feed"></div>
+		</section>
+		<section id="tizen">
+			<header>Tizen</header>
 			<div class="feed"></div>
 		</section>
 	</article> 	
@@ -113,6 +127,7 @@ xn.use(["loader_test.XHR2"],function(XHR2,YahooAPI){
 		  "scope=https://www.googleapis.com/auth/userinfo.profile"+
 		  "+https://www.googleapis.com/auth/plus.me"+
 		  "+https://www.googleapis.com/auth/tasks"+
+		  "+https://www.googleapis.com/auth/cse"+
 		  "+https://www.googleapis.com/auth/userinfo.email&"+
 		  "state=/profile&"+
 		  "redirect_uri=http://mc1.test.renren.com/mlogin/xn_api_test/oauth2callback.html&"+
@@ -122,7 +137,7 @@ xn.use(["loader_test.XHR2"],function(XHR2,YahooAPI){
 	  login.href = url;
 	  login.target="_blank";
 	  login.innerHTML = "登录";
-	  //document.body.insertBefore(login,books);
+	  document.body.insertBefore(login,books);
 	  
 	  var url = "https://www.googleapis.com/books/v1/volumes?q=harry+potter";
 	  var xhr2 =new XHR2({
@@ -144,6 +159,12 @@ xn.use(["loader_test.XHR2"],function(XHR2,YahooAPI){
 	 
 	 
 });
+
+</script>
+<script type="text/javascript">
+xn.use(["xn_home.Control"],function(Control){
+	new Control();
+})
 
 </script>
 </body>

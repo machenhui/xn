@@ -40,10 +40,19 @@ script.src = 'lib/core-beta/Loader.js';
 document.getElementsByTagName('head')[0].appendChild(script);
 
 </script>
+<style type="text/css">
+.search_info{
+	border:1px solid red;
+}
+</style>
 </head>
 <body>
 回调页面
 <section class="user_info"></section>
+<div class="search_info">
+正在加载搜索结果
+</div>
+
 <script type="text/javascript">
   
   xn.use(["loader_test.XHR2"],function(XHR2){
@@ -156,7 +165,40 @@ document.getElementsByTagName('head')[0].appendChild(script);
  			}
  		});
   	   }
-  	    	  
+  	   
+  	   function getSearch(){
+  		   var searchURL = "https://www.googleapis.com/customsearch/v1?cx=013036536707430787589:_pqjad5hr1a&q=android,tizen&alt=json";
+  		   var searchEle = document.querySelector(".search_info");
+  		 var xhr2 =new XHR2({
+  			url:searchURL,
+  			method:"get",
+  			data:{
+  				"access_token":infoMap["access_token"],
+  				"cr":"countryCN"
+  			},
+  			withCredentials:false,
+  			data:null,
+  			success:function(response){
+  				console.log("search");
+  				var resultDIV = document.createDocumentFragment();
+  				for (var i = 0;i<response.items.length;i++){
+  					var item = response.items[i];
+  					var div = document.createElement("div");
+  					div.innerHTML = item.htmlSnippet;
+  					resultDIV.appendChild(div);
+  				}
+  				var resutlHTML = xn_template.google.search({result:response});
+  				searchEle.innerHTML = resutlHTML;
+  				console.log(response);
+  				
+  			},
+  			failure:function(response){				
+  				alert("error");
+  			}
+  		});
+  	   
+  	   }
+  	 getSearch(); 	  
   });
 
   </script>
