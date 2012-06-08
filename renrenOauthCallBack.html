@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>renren Oauth2.0 回调页面</title>
+<script type="text/javascript">
+var xn = {};
+xn.use = function() {
+	var arr = [];
+	for ( var i = 0, il = arguments.length; i < il; i++) {
+		arr.push(arguments[i]);
+	}
+	xn._cache_use.push(arr);
+};
+xn.create = function() {
+	var arr = [];
+	for ( var i = 0, il = arguments.length; i < il; i++) {
+		arr.push(arguments[i]);
+	}
+	xn._cache_create.push(arr);
+};
+xn._cache_use = new Array();
+xn._cache_create = new Array();
+xn.config = {
+	_path : {
+		"core-beta.Class" : {
+			path : 'lib/core-beta/Class.js',
+			requires : [ "loader_test.A", "loader_test.B" ]
+		},
+		"loader_test.A" : {
+			path : "lib/loader_test/A.js"
+		},
+		"loader_test.B" : {
+			path : "lib/loader_test/B.js"
+		}
+	}
+};
+var script = document.createElement('script');
+script.src = 'lib/core-beta/Loader.js';
+document.getElementsByTagName('head')[0].appendChild(script);
+
+</script>
+</head>
+<body>
+<div id="friends_message"></div>
+<form action="http://api.renren.com/restserver.do" method="post" target="_blank">
+	<input name="access_token" value="" type="text" />
+	<input name="method" value="friends.get" type="text" />
+	<input name="format" value="json" type="text" />
+	<input type="submit" value="提交"/>
+</form> 
+<script type="text/javascript">
+
+xn.use(["loader_test.LoginSuccess"],function(LoginSuccess){	
+	
+	LoginSuccess.initParam();	
+	document.querySelector("input[name='access_token']").value = LoginSuccess.access_token;
+	/* LoginSuccess.friendsGet(function(data){
+		document.querySelector("#friends_message").innerHTML=examples.simple.firends_oauth({friend_list:data});
+	}); */
+	  
+});
+</script>
+</body>
+</html>

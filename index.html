@@ -63,15 +63,23 @@ document.getElementsByTagName('head')[0].appendChild(script);
  	<a href="#science">科学</a>
  	<a href="#china">中国</a>
  	<a href="#android">Android</a>
- 	<a href="#tizen">Tizen</a>
+ 	<a href="#tizen">Tizen</a>	
  </nav>
 		<section id="weather">
 			<header>天气</header>
-			<div class="feed"></div>
+			<div class="feed">			
+			<i class="loading1"></i>这次的35px 的
+			<i class="loading2"></i>这次的20px 的
+			<i class="loading"></i>以前的一个
+			<i class="loading3"></i>以前的一个
+			
+			</div>
 		</section>
-		<section id="renren">
+		<section id="renren" onload="O.renren.show();" onunload="O.renren.hide();">
 			<header>人人网</header>
-			<div class="feed"></div>
+			<div class="login_message"></div>
+			<div class="searchFriend"></div>
+			<div class="feed_list"></div>
 		</section>
 		<section id="science">
 			<header>科学</header>
@@ -164,8 +172,37 @@ xn.use(["loader_test.XHR2"],function(XHR2,YahooAPI){
 <script type="text/javascript">
 xn.use(["xn_home.Control"],function(Control){
 	new Control();
-})
-
+});
+var O = {
+		renren:{
+			show:function(){
+				xn.use(["renren.Login",'renren.Feed'],function(Login,Feed){
+					var login = new Login();
+					login.checkLogin(function(data,oauth){
+						
+						document.querySelector("div.login_message").innerHTML=examples.simple.userMessage(data);
+						  
+						  oauth.friendsGet(function(data){
+							  
+							  document.querySelector("div.searchFriend").innerHTML = xnTemplate.sdk.searchFirends(data);
+						  });
+						  	
+						  oauth.feedGet(function(data){
+								 
+							   document.querySelector("div.feed_list").innerHTML=examples.simple.feed(data); 
+						  });
+						
+					},function(error){
+						alert("没登录，并且登录失败");
+					});
+				});
+			},
+			hide:function(){
+				
+			}
+		}
+}
 </script>
+ <input type="range" />
 </body>
 </html>
