@@ -50,16 +50,16 @@ document.getElementsByTagName('head')[0].appendChild(script);
 	<input type="submit" value="提交"/>
 </form> 
 <script type="text/javascript">
+var result = {};
+var hash = window.location.search.slice(1);
+var hA=hash.split("&");
+for(var i = 0;i < hA.length;i++){
+	var kv = hA[i].split("=");
+	result[kv[0]]=kv[1];
+}
+window.opener.postMessage(result,"*");
+window.close();
 
-xn.use(["loader_test.LoginSuccess"],function(LoginSuccess){	
-	
-	LoginSuccess.initParam();	
-	document.querySelector("input[name='access_token']").value = LoginSuccess.access_token;
-	/* LoginSuccess.friendsGet(function(data){
-		document.querySelector("#friends_message").innerHTML=examples.simple.firends_oauth({friend_list:data});
-	}); */
-	  
-});
 </script>
 </body>
 </html>
