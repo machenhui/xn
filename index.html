@@ -198,7 +198,7 @@ xn.use(["loader_test.XHR2"],function(XHR2,YahooAPI){
 			}
 		}); 
 	  
-	 
+
 });
 
 </script>
@@ -220,14 +220,7 @@ var O = {
 						  			}
 						},access_token);
 						
-						/* oauth.userGetInfo({
-								success:function(data){
-									
-									document.querySelector("div.login_message").innerHTML=examples.simple.userMessage(data);
-			  					}
-						},access_token); */
-						
-						  oauth.feedGet({
+						 oauth.feedGet({
 							  success:function(data){	
 								
 							   	document.querySelector("div.feed_list").innerHTML=examples.simple.feed(data);
@@ -248,6 +241,8 @@ var O = {
 }
 /* alert(window.devicePixelRatio);
 alert(window.screen.width); */
+
+var pinyin = new Worker("lib/renren/worker/ChangeZHCNtoPinYin.js");
 </script>
  <input type="range" />
 </body>
