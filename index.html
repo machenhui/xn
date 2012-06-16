@@ -6,6 +6,30 @@
 <!-- 
   必须加入 user-scalable=no
   否则在部分机器上，fixed 定位，会出问题。
+  
+  
+<meta name="viewport"
+      content="
+          height = [pixel_value | device-height] ,
+          width = [pixel_value | device-width ] ,
+          initial-scale = float_value ,
+          minimum-scale = float_value ,
+          maximum-scale = float_value ,
+          user-scalable = [yes | no] ,
+          target-densitydpi = [dpi_value | device-dpi |
+                               high-dpi | medium-dpi | low-dpi]
+          " />
+
+  
+device-dpi - Use the device's native dpi as the target dpi. Default scaling never occurs.
+high-dpi - Use hdpi as the target dpi. Medium and low density screens scale down as appropriate.
+medium-dpi - Use mdpi as the target dpi. High density screens scale up and low density screens scale down. This is the default target density.
+low-dpi - Use ldpi as the target dpi. Medium and high density screens scale up as appropriate.
+<value> - Specify a dpi value to use as the target dpi. Values must be within the range 70–400.
+
+
+  target-densitydpi=medium-dpi  使用的分辨率是320*480
+  
  -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" />
 <meta charset="UTF-8">
@@ -173,6 +197,26 @@ xn.use(["loader_test.XHR2"],function(XHR2,YahooAPI){
 			
 			}
 		}); 
+	  
+	  
+	  
+	  var url = "http://client2.test.renren.com/xn_api/manifest/pinyin.php";
+	  var xhr2 =new XHR2({
+			url:url,
+			method:"get",
+			withCredentials:false,
+			data:null,
+			success:function(response){
+				console.log(response);
+				var result = xn_template.google.books({books:response});
+				
+				//books.innerHTML = result;
+			},
+			failure:function(response){				
+				alert("error");
+			
+			}
+		}); 
 	 
 	 
 });
@@ -222,9 +266,8 @@ var O = {
 			}
 		}
 }
-
-
-
+/* alert(window.devicePixelRatio);
+alert(window.screen.width); */
 </script>
  <input type="range" />
 </body>
