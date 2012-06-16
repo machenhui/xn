@@ -198,26 +198,6 @@ xn.use(["loader_test.XHR2"],function(XHR2,YahooAPI){
 			}
 		}); 
 	  
-	  
-	  
-	  var url = "http://client2.test.renren.com/xn_api/manifest/pinyin.php";
-	  var xhr2 =new XHR2({
-			url:url,
-			method:"get",
-			withCredentials:false,
-			data:null,
-			success:function(response){
-				console.log(response);
-				var result = xn_template.google.books({books:response});
-				
-				//books.innerHTML = result;
-			},
-			failure:function(response){				
-				alert("error");
-			
-			}
-		}); 
-	 
 	 
 });
 
