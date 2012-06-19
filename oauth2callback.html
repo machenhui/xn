@@ -114,13 +114,37 @@ document.getElementsByTagName('head')[0].appendChild(script);
   				console.log("Task +");
   				console.log(response);
   				
+  				insertTasks(response.items[0])
+  				
   			},
   			failure:function(response){				
   				alert("error");
   			}
-  		});
-  		   
+  		});  		   
   	   }
+  	   
+  	 function insertTasks(taskList){
+		   var taskListURL = "https://www.googleapis.com/tasks/v1/lists/"+taskList.id+"/tasks";
+		   
+		  var xhr2 =new XHR2({
+			url:taskListURL,
+			method:"post",
+			data:{
+				"access_token":infoMap["access_token"],
+				"title":"nihao"
+			},
+			withCredentials:false,
+			success:function(response){
+				console.log("insert +");
+				console.log(response);
+				
+			},
+			failure:function(response){				
+				alert("error");
+			}
+		});  		   
+	   }
+  	   
   	   function getActivities(userId){
   		   
   		  var plusURL = "https://www.googleapis.com/plus/v1/people/{userId}/activities/{collection}";
