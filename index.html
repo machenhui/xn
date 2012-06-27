@@ -209,20 +209,28 @@ xn.use(["xn_home.Control"],function(Control){
 var O = {
 		renren:{
 			show:function(){
-				xn.use(["renren.Login",'renren.Feed'],function(Login,Feed){
+				xn.use(["renren.Login"],function(Login){
 					var login = new Login();
 					login.checkLogin(function(access_token,oauth){
-						
+						if(access_token==null){
+							console.error("access_token 异常"+access_token);
+						}
 						oauth.friendsGet({
 							success:function(data){
-								
-							  			document.querySelector("div.searchFriend").innerHTML = xnTemplate.sdk.searchFirends(data);
-						  			}
+								if(data!=null&&data.error_code==4){
+									alert(data.error_msg);
+									return;
+								}
+							  	document.querySelector("div.searchFriend").innerHTML = xnTemplate.sdk.searchFirends(data);
+						  	}
 						},access_token);
 						
 						 oauth.feedGet({
 							  success:function(data){	
-								
+								if(data!=null&&data.error_code==4){
+									alert(data.error_msg);
+									return;
+								}
 							   	document.querySelector("div.feed_list").innerHTML=examples.simple.feed(data);
 							  }
 						  },access_token);
