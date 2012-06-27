@@ -30,7 +30,7 @@ low-dpi - Use ldpi as the target dpi. Medium and high density screens scale up a
 
   target-densitydpi=medium-dpi  使用的分辨率是320*480
   
- -->
+--> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" />
 <meta charset="UTF-8">
 <script type="text/javascript" src="http://mc1.test.renren.com/mlogin/xn_api_test/template"></script>
@@ -100,7 +100,9 @@ document.getElementsByTagName('head')[0].appendChild(script);
 		</section>
 		<section id="renren" onload="O.renren.show();" onunload="O.renren.hide();">
 			<header>人人网</header>
-			<div class="login_message"></div>
+			<div class="login_message">
+			 <a id="renrenLogin" href="http://www.baidu.com" target="_blank">人人登陆</a>
+			</div>
 			<div class="searchFriend"></div>
 			<div class="feed_list"></div>
 		</section>
@@ -177,7 +179,7 @@ xn.use(["loader_test.XHR2"],function(XHR2,YahooAPI){
 	  var login = document.createElement('a');
 	  login.href = url;
 	  login.target="_blank";
-	  login.innerHTML = "登录";
+	  login.innerHTML = "google登录";
 	  document.body.insertBefore(login,books);
 	  
 	  var url = "https://www.googleapis.com/books/v1/volumes?q=harry+potter";
@@ -215,6 +217,19 @@ var O = {
 						if(access_token==null){
 							console.error("access_token 异常"+access_token);
 						}
+						
+						oauth.userGetInfo({
+							success:function(data){
+								if(data!=null&&data.error_msg!=null){
+									alert(data.error_msg);
+									return;
+								}
+								debugger;
+						  		document.querySelector("div.login_message").innerHTML = examples.simple.userMessage(data);
+					  	
+							}
+						},access_token);
+						
 						oauth.friendsGet({
 							success:function(data){
 								if(data!=null&&data.error_code==4){
