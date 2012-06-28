@@ -100,6 +100,7 @@ document.getElementsByTagName('head')[0].appendChild(script);
 		</section>
 		<section id="renren" onload="O.renren.show();" onunload="O.renren.hide();">
 			<header>人人网</header>
+			<a id="renrenLogout" href="https://login.renren.com/mlogin/auth/swipe" target="_blank">人人退出</a>
 			<div class="login_message">
 			 <a id="renrenLogin" href="http://www.baidu.com" target="_blank">人人登陆</a>
 			</div>
@@ -218,13 +219,13 @@ var O = {
 							console.error("access_token 异常"+access_token);
 						}
 						
-						oauth.userGetInfo({
+						oauth.profileGetInfo({
 							success:function(data){
 								if(data!=null&&data.error_msg!=null){
 									alert(data.error_msg);
 									return;
 								}
-								debugger;
+							
 						  		document.querySelector("div.login_message").innerHTML = examples.simple.userMessage(data);
 					  	
 							}
