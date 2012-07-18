@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+@namespace profile "http://www.renren.com/userInfo";
+
+.profile p{
+	color:red;
+}

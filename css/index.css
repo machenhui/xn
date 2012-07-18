@@ -1,4 +1,6 @@
 @CHARSET "UTF-8";
+@import url("userInfo.css");
+@namespace foo "http://example.com/ns/foo"
 html,body{
 	margin:0px;
 	padding:0px;
@@ -53,7 +55,6 @@ article.google_news section{
 	width:100%;	
 	/* overflow:auto;
 	-webkit-overflow-scrolling:touch; */
-	border:1px solid red;
 	position:absolute;
 	z-index:-1;
 	top:0px;
@@ -168,3 +169,4 @@ input[type='range']::-webkit-slider-thumb {
     height:2.5em;
     width:4em;
 }
+
