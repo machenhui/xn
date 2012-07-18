@@ -235,9 +235,9 @@ var O = {
 							url:"http://i3.sinaimg.cn/dy/o/2012-06-29/1340911327_n5hxVG.jpg",
 							content:"bbbbbbbb"
 						} */
-						oauth.commonMethod("profile.getInfo",
+					/* 	oauth.commonMethod("profile.getInfo",
 												{
-													uid:200610823
+													uid:null//200610823
 												},
 												function(data){
 													if(data!=null&&data.error_code==4){
@@ -248,7 +248,7 @@ var O = {
 												},function(error){
 													
 													console.error(error.error_message);
-												});
+												}); */
 						oauth.friendsGet({
 							success:function(data){
 								if(data!=null&&data.error_code==4){
