@@ -1,0 +1,15 @@
+CACHE MANIFEST
+#version 1.0.1
+
+#直接缓存文件
+CACHE:
+css/index.css
+
+
+#网络加载
+NETWORK:
+/renren/
+
+#替代方案
+FALLBACK:
+/renren.html error.html
