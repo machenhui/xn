@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="charset=utf-8" />
+<meta http-equiv="Content-Type" charset="UTF-8"/>
+<meta content="telephone=no" name="format-detection" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+<style type="text/css">
+header{
+	position:relative;
+	background:#005EAC;
+}
+header img{
+	position:absolute;
+
+	height:100%;
+}
+header h1{
+	text-align:center;
+	color:#fff;
+	margin:0px;
+}
+
+header a{
+	position:absolute;
+	top:20%;
+	right:10px;
+	color:#fff;
+}
+html,body{
+	margin:0px;
+	padding:0px;
+}
+
+.login label{
+	width:4em;
+	display:inline-block;
+	text-align:left;
+}
+.check_code img{
+   width:8em;
+   display:inline-block;
+}
+.login input,
+.check_code a{
+	width:50%;
+}
+.check_code a{
+	display:inline-block;
+}
+fieldset{
+	margin:0.5em;
+}
+</style>
+<title>Wap 页面</title>
+</head>
+<body>
+	<header><img src="http://a.xnimg.cn/wap/logo.gif"/><h1>人人授权页面</h1><a href="javascript:window.location.reload();">关闭</a></header> 
+	<form action="" method="post">
+		<!-- 内容选项 -->
+		<fieldset>
+			<h2>点击授权,将允许美图秀秀以下操作:</h2>
+			<ul>
+				<li>
+					<h3>获取我的个人信息和好友关系</h3>
+					<p >包括性别，姓名，头像，好友列表及其他设置为所有人可见的基本信息。</p>
+
+				</li>
+				
+				<li>
+					<h3 >读取我的人人网内容</h3>
+					<p >读取相册，新鲜事，日志，状态，视频，留言</p>
+				</li>
+
+				<li>
+					<h3 >允许发布消息到人人网</h3>
+					<p >创建相册，新鲜事，日志，状态，视频，留言</p>
+				</li>
+
+				<li>
+					<h3 >分享游戏积分到人人网</h3>
+					<p >在新鲜事中发布我的游戏信息</p>
+				</li>
+
+				<li>
+					<h3>同步音乐，分享音乐到人人网</h3>
+					<p></p>
+				</li>
+
+				<li>
+					<h3 >获取我地理位置的相关信息</h3>
+					<p >包括查看周围好友，以及接收基于地理位置的推送信息</p>
+				</li>
+				
+				<li>
+					<h3>管理我的公共主页</h3>
+					<p ></p>
+				</li>
+
+				<li>
+					<h3 >管理我的站内信息</h3>
+					<p >包括消息，站内消息和留言</p>
+				</li>
+			</ul>
+		</fieldset>
+		<!-- 登录区域  -->
+		<fieldset class="login">
+			<p><label>用户名:</label><input type="text" placeholder="用户名" /> </p>
+			<p><label>密码:</label><input type="password" placeholder="密码" /> </p>
+			<p class="check_code"><img src="http://3g.renren.com/rndimg?post=_OAUTH_rrwmfx2011@126.com&amp;rnd=1332994450460"></img><a href="javascript:window.location.reload();">换一换</a></p>
+			<p><label>验证码:</label><input type="password" placeholder="验证码" /> </p>
+			<p ><input type="submit" value="授权" class="font-30"/><a  href="#" class="cancel font-30">取消</a></p>	
+			<p ><a>注册人人网帐号</a><a>忘记密码</a></p>
+		</fieldset>
+	</form>
+</body>
+</html>

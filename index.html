@@ -284,7 +284,9 @@ var O = {
 }
 /* alert(window.devicePixelRatio);
 alert(window.screen.width); */
-
+var nav = document.querySelector("nav");
+var styles = window.getComputedStyle(nav);
+console.log(styles.position);
 var pinyin = new Worker("lib/renren/worker/ChangeZHCNtoPinYin.js");
 </script>
  <input type="range" />

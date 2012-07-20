@@ -45,8 +45,9 @@ article.google_news nav a{
 
 article.google_news{
 	box-sizing:border-box;
-	position:relative;
-	-webkit-perspective: 7680px;	
+	 position:relative; 
+	 /*这个属性影响子元素fixed 定位*/
+	/*-webkit-perspective: 7680px;	*/
 	padding-top:2.5em;
 	/* overflow-y:auto;
 	-webkit-overflow-scrolling:touch; */
