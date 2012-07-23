@@ -9,6 +9,7 @@
 
 <style type="text/css">
 header{
+	position:relative;
 	background:#005EAC;
 }
 
@@ -36,15 +37,17 @@ html,body{
    width:8em;
    display:inline-block;
 }
-.login input,
-.check_code a{
-	width:50%;
-}
-.check_code a{
+
+.login p.button a{
 	display:inline-block;
+	margin-left:0.5em;
 }
 fieldset{
 	margin:0.5em;
+	border:1px solid #ccc;
+}
+.login p a{
+	display:block;
 }
 </style>
 <title>Wap 页面</title>
@@ -104,8 +107,8 @@ fieldset{
 			<p><label>密码:</label><input type="password" placeholder="密码" /> </p>
 			<p class="check_code"><img src="http://3g.renren.com/rndimg?post=_OAUTH_rrwmfx2011@126.com&amp;rnd=1332994450460"></img><a href="javascript:window.location.reload();">换一换</a></p>
 			<p><label>验证码:</label><input type="password" placeholder="验证码" /> </p>
-			<p ><input type="submit" value="授权" class="font-30"/><a  href="#" class="cancel font-30">取消</a></p>	
-			<p ><a>注册人人网帐号</a><a>忘记密码</a></p>
+			<p class="button"><input type="submit" value="授权" class="font-30"/><a  href="#" class="cancel font-30">取消</a></p>	
+			<p><a href="#">注册人人网帐号</a><a href="#">忘记密码</a></p>
 		</fieldset>
 	</form>
 </body>
