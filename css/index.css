@@ -1,10 +1,13 @@
 @CHARSET "UTF-8";
+@import url("userInfo.css");
+
 html,body{
 	margin:0px;
 	padding:0px;
-	-webkit-touch-callout:none;
+	/* -webkit-touch-callout:none; */
 	-webkit-tap-highlight-color:rgba(0,0,0,0);		
 	box-sizing:border-box;
+	-webkit-text-size-adjust:none;
 	
 }
 
@@ -12,7 +15,7 @@ article.google_news nav{
 	position:fixed;
 	background-image:-webkit-gradient(linear,0 0,0 100%,from(white),to(#DBDBDB));
 	box-shadow:0 0px 1px 0px black;
-	top:0px;
+	top:0px; 
 	width:100%;
 	z-index:100;
 	display:-webkit-box;
@@ -42,8 +45,9 @@ article.google_news nav a{
 
 article.google_news{
 	box-sizing:border-box;
-	position:relative;
-	-webkit-perspective: 7680px;	
+	 position:relative; 
+	 /*这个属性影响子元素fixed 定位*/
+	/*-webkit-perspective: 7680px;	*/
 	padding-top:2.5em;
 	/* overflow-y:auto;
 	-webkit-overflow-scrolling:touch; */
@@ -59,6 +63,8 @@ article.google_news section{
 	opacity:1;
 	background-color:#fff;
 	-webkit-backface-visibility:hidden;
+	-webkit-transform-style: preserve-3d;
+	box-sizing:border-box;
 }
 
  @-webkit-keyframes pop_in_animation {
@@ -164,3 +170,4 @@ input[type='range']::-webkit-slider-thumb {
     height:2.5em;
     width:4em;
 }
+

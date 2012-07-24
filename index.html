@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:foo="http://example.com/ns/foo">
 <head>
 <meta http-equiv="Content-Type" charset="UTF-8">
 <meta content="telephone=no" name="format-detection" />
@@ -32,8 +32,9 @@ low-dpi - Use ldpi as the target dpi. Medium and high density screens scale up a
   
 --> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" />
-<meta charset="UTF-8">
-<script type="text/javascript" src="http://mc1.test.renren.com/mlogin/xn_api_test/template"></script>
+<meta charset="UTF-8" />
+<!-- <script type="text/javascript" src="http://mc1.test.renren.com/mlogin/xn_api_test/template"></script>
+ --><script type="text/javascript" src="http://10.2.46.159:8080/j-template-t2/js.jsp"></script>
 <link rel="stylesheet" href="css/index.css" type="text/css" />
 <script type="text/javascript">
 var xn = {};
@@ -226,7 +227,7 @@ var O = {
 									return;
 								}
 							
-						  		document.querySelector("div.login_message").innerHTML = examples.simple.userMessage(data);
+						  		document.querySelector("div.login_message").innerHTML = examples.simple.userMessage({profile:data});
 					  	
 							}
 						},access_token);
@@ -235,9 +236,9 @@ var O = {
 							url:"http://i3.sinaimg.cn/dy/o/2012-06-29/1340911327_n5hxVG.jpg",
 							content:"bbbbbbbb"
 						} */
-						oauth.commonMethod("profile.getInfo",
+					/* 	oauth.commonMethod("profile.getInfo",
 												{
-													uid:200610823
+													uid:null//200610823
 												},
 												function(data){
 													if(data!=null&&data.error_code==4){
@@ -248,7 +249,7 @@ var O = {
 												},function(error){
 													
 													console.error(error.error_message);
-												});
+												}); */
 						oauth.friendsGet({
 							success:function(data){
 								if(data!=null&&data.error_code==4){
@@ -283,7 +284,9 @@ var O = {
 }
 /* alert(window.devicePixelRatio);
 alert(window.screen.width); */
-
+var nav = document.querySelector("nav");
+var styles = window.getComputedStyle(nav);
+console.log(styles.position);
 var pinyin = new Worker("lib/renren/worker/ChangeZHCNtoPinYin.js");
 </script>
  <input type="range" />
