@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html Tmanifest="renren.manifest">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" />
+<script type="text/javascript" src="resource/header.js"></script>
+<title>人人测试页面</title>
+</head>
+<body>
+开始加载人人分享测试页面
+<script type="text/javascript">
+/* xn.use(["xn_home.Control"],function(Control){
+	new Control();
+}); */
+var O = {
+		renren:{
+			show:function(){
+				xn.use(["renren.Login"],function(Login){
+					var login = new Login();
+					login.checkLogin(function(access_token,oauth){
+						if(access_token==null){
+							console.error("access_token 异常"+access_token);
+						}
+						
+						oauth.profileGetInfo({
+							success:function(data){
+								if(data!=null&&data.error_msg!=null){
+									alert(data.error_msg);
+									return;
+								}
+							
+						  		document.querySelector("div.login_message").innerHTML = examples.simple.userMessage({profile:data});
+					  	
+							}
+						},access_token);
+					
+						oauth.friendsGet({
+							success:function(data){
+								if(data!=null&&data.error_code==4){
+									alert(data.error_msg);
+									return;
+								}
+							  	document.querySelector("div.searchFriend").innerHTML = xnTemplate.sdk.searchFirends(data);
+						  	}
+						},access_token);
+						
+						 oauth.feedGet({
+							  success:function(data){	
+								if(data!=null&&data.error_code==4){
+									alert(data.error_msg);
+									return;
+								}
+							   	document.querySelector("div.feed_list").innerHTML=examples.simple.feed(data);
+							  }
+						  },access_token);
+						  
+						
+						
+					},function(error){
+						alert("没登录，并且登录失败");
+					});
+				});
+			},
+			hide:function(){
+				
+			}
+		}
+}
+
+//var pinyin = new Worker("lib/renren/worker/ChangeZHCNtoPinYin.js");
+</script>
+</body>
+</html>
