@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" />
+<script type="text/javascript" src="resource/header.js"></script>
+<title>合并CSS文件中的图片</title>
+<style type="text/css">
+	.noDis{
+		display:none!important;
+	}
+</style>
+</head>
+<body>
+<article>
+	<section>
+		<header>功能概述</header>
+		<div class="content">
+			<ol>
+				<li>上传CSS文件</li>
+				<li>匹配其中的背景图片</li>
+				<li>合并图片</li>
+				<li>生成新的CSS文件</li>
+			</ol>
+		</div>
+	</section>
+	<form action="">
+		<fieldset>
+			<legend>上传文件</legend>
+			<input type="file" accept="text/css">		
+		</fieldset>
+		<fieldset class="noDis">
+			<legend>下载文件</legend>
+			<a href="#">css 文件地址</a>
+			<a href="#">图片文件地址</a>		
+		</fieldset>
+	</form>
+		
+</article>
+<script type="text/javascript">
+	xn.use(["tool.ImageSprit"],function(ImageSprit){
+		
+		var imageSprit =new ImageSprit();
+		imageSprit.test('.body{background-image:url(/images/cc.png);color:red;}html{background:url(cc.png);color:blue;}#html{background:url(cc.png) 0 0 no-repeat;}');
+	});
+
+</script>
+</body>
+</html>
