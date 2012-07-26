@@ -10,6 +10,26 @@
 	.noDis{
 		display:none!important;
 	}
+	p{
+		
+		word-wrap:break-word;
+		word-break:break-all;
+	}
+	.campereResult{
+		display:-webkit-box;
+		-webkit-box-orient: horizontal;
+		-webkit-box-align: start;
+	}
+	.campereResult p{
+		border:1px solid #ccc;
+		padding:0.5em;
+		margin:0.5em;
+		-webkit-box-flex:1;
+		width:50%;
+	}
+	.fileLink[href]{
+		color:-webkit-link;
+	}
 </style>
 </head>
 <body>
@@ -20,7 +40,7 @@
 			<ol>
 				<li>上传CSS文件</li>
 				<li>匹配其中的背景图片</li>
-				<li>合并图片</li>
+				<li>替换为base64的图片</li>
 				<li>生成新的CSS文件</li>
 			</ol>
 		</div>
@@ -28,21 +48,96 @@
 	<form action="">
 		<fieldset>
 			<legend>上传文件</legend>
-			<input type="file" accept="text/css">		
+			<input type="file" accept="text/css" multiple="multiple">		
 		</fieldset>
-		<fieldset class="noDis">
+		<fieldset >
 			<legend>下载文件</legend>
-			<a href="#">css 文件地址</a>
-			<a href="#">图片文件地址</a>		
+			<a class="fileLink" target="_blank">css 文件地址</a>		
+		</fieldset>
+		<fieldset>
+			<legend>对比结果</legend>
+			<div class="campereResult">
+				<p class="source"></p>
+				<p class="result"></p>				
+			</div>
+			
 		</fieldset>
 	</form>
 		
 </article>
+
+
 <script type="text/javascript">
-	xn.use(["tool.ImageSprit"],function(ImageSprit){
+	xn.use(["tool.ImageSprit","tool.TransBase64","tool.SaveFile"],function(ImageSprit,TransBase64,SaveFile){
 		
 		var imageSprit =new ImageSprit();
-		imageSprit.test('.body{background-image:url(/images/cc.png);color:red;}html{background:url(cc.png);color:blue;}#html{background:url(cc.png) 0 0 no-repeat;}');
+		var saveFile = new SaveFile();
+		var fileInput = document.querySelector("input[type='file']");
+		fileInput.addEventListener("change",function(event){
+			var fileList = event.currentTarget.files;
+			var len = fileList.length;
+			while(len--){
+				var file = fileList[len];
+				console.log(file.name);
+				
+				
+				var reader = new FileReader();
+				reader.onload=function(event){
+					var testString = reader.result;
+					
+					transBase64.test(testString
+							 ,function(data){
+									var campereResultEle  = document.getElementsByClassName("campereResult")[0];
+									var campereResultEleTemp = campereResultEle.cloneNode(true);
+									
+									var source = campereResultEleTemp.getElementsByClassName("source")[0];
+									var result = campereResultEleTemp.getElementsByClassName("result")[0];
+									source.innerHTML = testString.replace(/({|}|;)/gi,"$1<br/>");
+									result.innerHTML = data.replace(/({|}|;)/gi,"$1<br/>");
+									campereResultEle.parentElement.appendChild(campereResultEleTemp);
+									createURL(data,file.name);
+							  },function(event){
+									console.error("error");
+							  });
+				}
+				reader.readAsText(file);
+			}
+		},false);
+		
+		function createURL(fileString,fileName){
+			var bb = new Blob([fileString],{"type":"text\/css"});
+			bb.name = fileName;
+			saveFile.saveFile(bb, function(data){
+				console.log("保存成功"+data);
+				var url = data;
+				var fileLink = document.getElementsByClassName("fileLink")[0];
+				fileLink.href = url;
+				fileLink.innerHTML = fileName;
+			}, function(e){
+				console.error(e);
+				var url = window.webkitURL.createObjectURL(bb);
+				var fileLink = document.getElementsByClassName("fileLink")[0];
+				fileLink.href = url;
+				fileLink.innerHTML = fileName;
+			})
+			
+		}
+		
+		var transBase64 = new TransBase64();
+		//imageSprit.test('.body{background-image:url(/images/cc.png);color:red;}html{background:url(cc.png);color:blue;}#html{background:url(cc.png) 0 0 no-repeat;}');
+		var testString = '.body{background-image:url(/static/images/oauth/logo.png);color:red;}html{background:url(/static/images/oauth/oauth_merge.png);color:blue;}#html{background:url(/static/images/oauth/oauth_merge.png) 0 0 no-repeat;}';
+		/* transBase64.test(testString
+						 ,function(data){
+								var campereResultEle  = document.getElementsByClassName("campereResult")[0];
+								campereResultEle.classList.remove("noDis");
+								var source = campereResultEle.getElementsByClassName("source")[0];
+								var result = campereResultEle.getElementsByClassName("result")[0];
+								source.innerHTML = testString.replace(/({|}|;)/gi,"$1<br/>");
+								result.innerHTML = data.replace(/({|}|;)/gi,"$1<br/>");
+						  },function(event){
+								console.error("error");
+						  }); */
+
 	});
 
 </script>
