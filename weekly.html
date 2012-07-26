@@ -6,17 +6,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" />
 <script type="text/javascript" src="http://10.2.46.159:8080/j-template-t2/js.jsp"></script>
 <script type="text/javascript" src="resource/header.js"></script>
+<link rel="stylesheet" href="css/weekly.css" type="text/css" />
 </head>
 <body>
 <article>
 	<header>工作周报</header>
-	<section>
+	<section class="list_container">
 		
 	</section>
 </article>
 <script type="text/javascript">
  xn.use(["renren.Weekly"],function(Weekly){
-	 var weekly = new Weekly();
+	 var weekly = new Weekly(".list_container");
  })
 </script>
 </body>
