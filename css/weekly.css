@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+section {
+	border:1px solid #ccc;
+}
+
+.list_container .header{
+	display:-webkit-box;
+	-webkit-box-origin:horizontal;
+	/* -webkit-box-pack:center; */
+	-webkit-box-align:center;
+}
+
+
+.list_container .header h2,
+.list_container .header i.icon{
+	display:block;
+}
+.list_container .header h2.date{
+	-webkit-box-flex:2;
+	max-width:7em;
+}
+.list_container .header h2.title{
+	-webkit-box-flex:8;
+}
+.list_container .header i.icon{
+	max-width:2em;
+	min-height:1em;
+	-webkit-box-flex:2;
+	text-align:right;
+	position:relative;
+	font-style:normal;
+}
+.list_container .header i.icon.up::after{
+	position:absolute;
+	right:1em;
+	top:0px;
+	content:">>";
+	-webkit-transform:rotateZ(90deg);
+}
