@@ -69,7 +69,7 @@ document.getElementsByTagName('head')[0].appendChild(script);
   	  var xhr2 =new XHR2({
   			url:tokeninfourl,
   			method:"get",
-  			withCredentials:false,
+  			withCredentials:true,
   			data:null,
   			success:function(response){
   				console.log(response);

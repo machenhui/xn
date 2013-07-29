@@ -10,14 +10,18 @@
 开始加载人人分享测试页面
 <script type="text/javascript">
 /* xn.use(["xn_home.Control"],function(Control){
+	
 	new Control();
-}); */
+});  */
+
 var O = {
 		renren:{
 			show:function(){
 				xn.use(["renren.Login"],function(Login){
 					var login = new Login();
+					
 					login.checkLogin(function(access_token,oauth){
+						
 						if(access_token==null){
 							console.error("access_token 异常"+access_token);
 						}
@@ -66,7 +70,7 @@ var O = {
 			}
 		}
 }
-
+O.renren.show();
 //var pinyin = new Worker("lib/renren/worker/ChangeZHCNtoPinYin.js");
 </script>
 </body>

@@ -30,5 +30,5 @@ xn.config = {
 	}
 };
 var script = document.createElement('script');
-script.src = 'http://xn.com/lib/core-beta/Loader.js';
+script.src = '/lib/core-beta/Loader.js';
 document.getElementsByTagName('head')[0].appendChild(script);
